@@ -1,6 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+// Import custom PNG icons
+import btechIcon from '../assets/btech_icon.png';
+import class12Icon from '../assets/class12_icon.png';
+import class10Icon from '../assets/class10_icon.png';
+
 const AcademicsPage = ({ onBack }) => {
   const academicData = [
     {
@@ -9,8 +14,8 @@ const AcademicsPage = ({ onBack }) => {
       institution: "Techno Main Salt Lake",
       period: "2024 - 2028",
       description: "Pursuing B.Tech CSBS, focusing on modern web technologies, software engineering core subjects, and business systems integration.",
-      gradeCardUrl: "/btech_gradecard.pdf",
-      icon: "🎓"
+      gradeCardUrl: null, // Update when available
+      icon: btechIcon
     },
     {
       title: "Higher Secondary (Class XII)",
@@ -19,7 +24,7 @@ const AcademicsPage = ({ onBack }) => {
       period: "2022 - 2024",
       description: "Completed higher secondary education with a strong focus on Physics, Chemistry, and Mathematics.",
       gradeCardUrl: "/class12_gradecard.pdf",
-      icon: "📜"
+      icon: class12Icon
     },
     {
       title: "Secondary Education (Class X)",
@@ -28,7 +33,7 @@ const AcademicsPage = ({ onBack }) => {
       period: "2022",
       description: "Successfully cleared secondary board examinations with commendable academic performance.",
       gradeCardUrl: "/class10_gradecard.pdf",
-      icon: "🏆"
+      icon: class10Icon
     }
   ];
 
@@ -68,9 +73,9 @@ const AcademicsPage = ({ onBack }) => {
             transition={{ duration: 0.5, delay: index * 0.15 }}
             className="relative group"
           >
-            {/* Timeline Icon Node */}
-            <div className="absolute -left-[45px] md:-left-[61px] top-0 w-10 h-10 rounded-full bg-brand-cream border-2 border-brand-yellow flex items-center justify-center text-lg shadow-lg shadow-brand-yellow/20 group-hover:scale-110 transition-transform">
-              {item.icon}
+            {/* Custom PNG Timeline Icon Node */}
+            <div className="absolute -left-[45px] md:-left-[61px] top-0 w-10 h-10 rounded-full bg-brand-cream border-2 border-brand-yellow p-1.5 shadow-lg shadow-brand-yellow/20 group-hover:scale-110 transition-transform">
+              <img src={item.icon} alt={item.title} className="w-full h-full object-contain" />
             </div>
 
             {/* Academic Card Content */}
@@ -92,14 +97,16 @@ const AcademicsPage = ({ onBack }) => {
               </p>
 
               {/* Grade Card Button */}
-              <a
-                href={item.gradeCardUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orange/90 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all shadow-md shadow-brand-orange/20"
-              >
-                📄 Grade Card / Certificate
-              </a>
+              {item.gradeCardUrl && (
+                <a
+                  href={item.gradeCardUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orange/90 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all shadow-md shadow-brand-orange/20"
+                >
+                  📄 Grade Card / Certificate
+                </a>
+              )}
             </div>
           </motion.div>
         ))}

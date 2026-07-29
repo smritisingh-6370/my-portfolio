@@ -1,6 +1,11 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Import custom PNG icons
+import btechIcon from '../assets/btech_icon.png';
+import class12Icon from '../assets/class12_icon.png';
+import class10Icon from '../assets/class10_icon.png';
+
 const AcademicsModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
@@ -11,7 +16,9 @@ const AcademicsModal = ({ isOpen, onClose }) => {
       institution: "Techno Main Salt Lake",
       period: "2024 - 2028",
       description: "Focusing on software development, web technologies, computer science core subjects, and business systems integration.",
-      badge: "Current"
+      badge: "Current",
+      icon: btechIcon,
+      gradeCardUrl: null // Add when ready
     },
     {
       title: "Higher Secondary (Class XII)",
@@ -19,7 +26,9 @@ const AcademicsModal = ({ isOpen, onClose }) => {
       institution: "Senior Secondary School",
       period: "2022 - 2024",
       description: "Completed secondary education with a strong emphasis on Physics, Chemistry, and Mathematics.",
-      badge: "Completed"
+      badge: "Completed",
+      icon: class12Icon,
+      gradeCardUrl: "/class12_gradecard.pdf"
     },
     {
       title: "Secondary Education (Class X)",
@@ -27,7 +36,9 @@ const AcademicsModal = ({ isOpen, onClose }) => {
       institution: "High School",
       period: "2022",
       description: "Successfully cleared secondary board examinations with high distinction.",
-      badge: "Completed"
+      badge: "Completed",
+      icon: class10Icon,
+      gradeCardUrl: "/class10_gradecard.pdf"
     }
   ];
 
@@ -46,7 +57,7 @@ const AcademicsModal = ({ isOpen, onClose }) => {
           {/* Close Button */}
           <button 
             onClick={onClose}
-            className="absolute top-6 right-6 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors text-xl font-bold"
+            className="absolute top-6 right-6 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors text-xl font-bold cursor-pointer"
           >
             ✕
           </button>
@@ -64,8 +75,10 @@ const AcademicsModal = ({ isOpen, onClose }) => {
             {academicData.map((item, index) => (
               <div key={index} className="relative group">
                 
-                {/* Glowing Node Dot */}
-                <div className="absolute -left-[31px] md:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-cyan-400 border-4 border-slate-900 shadow-lg shadow-cyan-500/50 group-hover:scale-125 transition-transform"></div>
+                {/* PNG Icon Node Circle */}
+                <div className="absolute -left-[43px] md:-left-[51px] top-1 w-10 h-10 rounded-full bg-slate-900 border-2 border-cyan-400 p-1.5 shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform">
+                  <img src={item.icon} alt={item.title} className="w-full h-full object-contain" />
+                </div>
 
                 {/* Card */}
                 <div className="bg-slate-800/50 border border-slate-700/60 p-5 rounded-2xl hover:border-cyan-400/50 transition-all backdrop-blur-sm">
@@ -78,9 +91,22 @@ const AcademicsModal = ({ isOpen, onClose }) => {
                       {item.period}
                     </span>
                   </div>
-                  <p className="text-slate-400 text-sm leading-relaxed mt-3">
+                  
+                  <p className="text-slate-400 text-sm leading-relaxed my-3">
                     {item.description}
                   </p>
+
+                  {/* Grade Card Link inside Modal */}
+                  {item.gradeCardUrl && (
+                    <a
+                      href={item.gradeCardUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-xs font-semibold text-cyan-300 bg-cyan-950/60 hover:bg-cyan-900/80 border border-cyan-700/60 px-3.5 py-1.5 rounded-lg transition-colors mt-1"
+                    >
+                      📄 View Grade Card
+                    </a>
+                  )}
                 </div>
 
               </div>

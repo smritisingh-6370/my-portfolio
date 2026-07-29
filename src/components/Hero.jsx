@@ -61,9 +61,11 @@ const Hero = () => {
             >
               View Work
             </a>
+
             <a 
               href="/resume.pdf" 
-              download="Smriti_Singh_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="border-2 border-brand-green text-brand-green font-bold px-8 py-3.5 rounded-xl transition-all hover:bg-brand-green hover:text-white"
             >
               Resume
